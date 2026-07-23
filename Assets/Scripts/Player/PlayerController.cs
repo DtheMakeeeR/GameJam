@@ -11,11 +11,21 @@ public class PlayerController : MonoBehaviour
     [Header("Шаги")]
     [SerializeField] private int _stepsPerCycle;
     [SerializeField] private int _currentSteps;
+
+    //[Header("Спрайты")]
+    //[SerializeField] private GameObject _sideSprite;
+    //[SerializeField] private GameObject _upSprite;
+    //[SerializeField] private GameObject _downSprite;
+
     [Header("Рейкаст")]
     [SerializeField] private LayerMask _raycastMask;
     [SerializeField] private float _raycastDistance;
-    [Header("Текст")]
+    [SerializeField] private float _visionDistance;
+    private List<GameObject> _visibleObjects;
+
+    [Header("Ссылки")]
     [SerializeField] private TMP_Text _stepsText;
+    [SerializeField] private FieldOfView _fieldOfView;
 
     private bool CanMove => _currentSteps > 0;
 
@@ -47,23 +57,50 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(!CanMove) return;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, _moveInput, _raycastDistance, _raycastMask);
-        if (hit)
-        {
-            Debug.Log($"Hit: {hit.collider.name}. Can't move!");
-            
+        if (!CanMove) return;
+        if (_moveInput.x < 0) {
+
+            Vector3 newLocalScale = gameObject.transform.localScale;
+            newLocalScale.x = -Mathf.Abs(newLocalScale.x);
+            gameObject.transform.localScale = newLocalScale;
         }
-        else
+        else if (_moveInput.x > 0)
+        {
+            Vector3 newLocalScale = gameObject.transform.localScale;
+            newLocalScale.x = Mathf.Abs(newLocalScale.x);
+            gameObject.transform.localScale = newLocalScale;
+        }
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, _moveInput, _raycastDistance, _raycastMask);
+        //if (hit)
+        //{
+        //    Debug.Log($"Hit: {hit.collider.name}. Can't move!");
+        //}
+        //else
+        //{
+        //    Debug.Log("Path is clear. Moving player.");
+        //    _currentSteps--;
+        //    UpdateStepsText();
+        //    if ( _currentSteps == 0 )
+        //    {
+        //        Timing.RunCoroutine(_ResetStepsCoroutine().CancelWith(gameObject));
+        //    }
+        //    transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
+        //}
+        if (TilesManager.Instance.CanEnterTile(transform.position.With(z: 0), transform.position.With(z: 0) + new Vector3(_moveInput.x, _moveInput.y, 0)))
         {
             Debug.Log("Path is clear. Moving player.");
             _currentSteps--;
             UpdateStepsText();
-            if ( _currentSteps == 0 )
+            if (_currentSteps == 0)
             {
                 Timing.RunCoroutine(_ResetStepsCoroutine().CancelWith(gameObject));
             }
             transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
+            
+        }
+        else
+        {
+            Debug.Log("Can't move to the target tile!");
         }
     }
 
@@ -74,22 +111,17 @@ public class PlayerController : MonoBehaviour
         UpdateStepsText();
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void OnDisable()
     {
         if (_playerActionMap != null)
         {
+            _playerActionMap.FindAction("Move").performed -= OnMovePerformed;
             _playerActionMap.Disable();
         }
     }
-
+    private void Update()
+    {
+        _fieldOfView.SetOrigin(transform.position.With(z: -1));
+    }
 }

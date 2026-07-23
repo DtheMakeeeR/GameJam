@@ -1,0 +1,61 @@
+using UnityEngine;
+
+public class Tile : MonoBehaviour
+{
+    [SerializeField] private bool[] _walls = new bool[4];
+    public bool CanEnter(Vector3 startPos)
+    {
+        if(startPos.y > transform.position.y)
+        {
+            if(_walls[0])
+            {
+                Debug.Log("Cannot enter from top");
+                return false;
+            }
+            else
+            {
+                Debug.Log("Can enter from top");
+                return true;
+            }
+        }
+        else if(startPos.y < transform.position.y)
+        {
+            if(_walls[2])
+            {
+                Debug.Log("Cannot enter from bottom");
+                return false;
+            }
+            else
+            {
+                Debug.Log("Can enter from bottom");
+                return true;
+            }
+        }
+        else if(startPos.x > transform.position.x)
+        {
+            if(_walls[1])
+            {
+                Debug.Log("Cannot enter from right");
+                return false;
+            }
+            else
+            {
+                Debug.Log("Can enter from right");
+                return true;
+            }
+        }
+        else
+        {
+            if(_walls[3])
+            {
+                Debug.Log("Cannot enter from left");
+                return false;
+            }
+            else
+            {
+                Debug.Log("Can enter from left");
+                return true;
+            }
+        }
+    }
+}
