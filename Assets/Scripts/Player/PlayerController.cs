@@ -159,6 +159,10 @@ public class PlayerController : MonoBehaviour
     {
         CurrentSteps += steps;
     }
+    public void IncreaseStepsPerCycle(int steps)
+    {
+        _stepsPerCycle += steps;
+    }
     public void SetSpecialFlag(bool flag) => SpecialFlag = flag;
     private void OnTriggerEnter2D(Collider2D collision)
     {
