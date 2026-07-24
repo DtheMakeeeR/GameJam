@@ -6,21 +6,23 @@ public class TilesManager : MonoBehaviour
     [SerializeField] private Tile[] _tiles;
     [SerializeField] private float _tilesLevel;
     public static TilesManager Instance { get; private set; }
+
+    
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        // if(Instance == null)
+        // {
+        //     Instance = this;
+        // }
+        // else
+        // {
+        //     Destroy(this);
+        // }
+        Instance = this;
     }
     private void Start()
     {
-        SortAndRenameTiles();
+        // SortAndRenameTiles();
     }
 
     private void SortAndRenameTiles()
@@ -53,5 +55,10 @@ public class TilesManager : MonoBehaviour
             return false;
         }
         return targetTile.CanEnter(startPos);
+    }
+    
+    public void InitDynamically(Tile[] newTiles)
+    {
+        _tiles = newTiles;
     }
 }

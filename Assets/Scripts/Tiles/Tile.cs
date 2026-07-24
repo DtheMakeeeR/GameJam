@@ -3,6 +3,21 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private bool[] _walls = new bool[4];
+    
+    [SerializeField] private GameObject[] _wallVisuals = new GameObject[4]; 
+
+    public void Setup(int[] cellWalls)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            _walls[i] = cellWalls[i] == 1;
+            
+            if (_wallVisuals.Length > i && _wallVisuals[i] != null)
+            {
+                _wallVisuals[i].SetActive(_walls[i]);
+            }
+        }
+    }
     public bool CanEnter(Vector3 startPos)
     {
         if(startPos.y > transform.position.y)

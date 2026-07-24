@@ -1,60 +1,44 @@
 Shader "Custom/MaskStencilShader"
 {
-    Properties
-    {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Color ("Color", Color) = (1,1,1,1)
-    }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Transparent" }
-        LOD 100
+        // 1. Очередь рендера Transparent-1 (2999). 
+        // Заставляет FOV рисоваться ДО того, как нарисуются спрайты лабиринта и тьмы (у них очередь 3000).
+        Tags { "Queue"="Transparent-1" }
+        
+        // 2. Магия невидимости: запрещаем выводить какой-либо цвет на экран.
+        ColorMask 0
+        ZWrite Off
+
+        // 3. Записываем "1" в Stencil-буфер там, где есть лучи FOV
+        Stencil
+        {
+            Ref 1
+            Comp Always
+            Pass Replace
+        }
 
         Pass
         {
-            Stencil
-            {
-                Ref 1
-                Comp Always
-                Pass Replace
-            }
-
-            ZWrite Off
-            Blend SrcAlpha OneMinusSrcAlpha
-
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-            };
-
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            fixed4 _Color;
+            struct appdata { float4 vertex : POSITION; };
+            struct v2f { float4 vertex : SV_POSITION; };
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                return col;
+                // Цвет тут уже не важен из-за ColorMask 0, но мы всё равно возвращаем пустоту
+                return fixed4(0,0,0,0); 
             }
             ENDCG
         }
