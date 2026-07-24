@@ -9,7 +9,7 @@ Shader "Custom/DarknessStencil"
         Tags { "Queue"="Transparent" "RenderType"="Transparent" }
         Blend SrcAlpha OneMinusSrcAlpha
         
-        // Эта часть смотрит на ваш FOV. Если FOV оставил метку "1", темнота здесь не рисуется.
+        
         Stencil
         {
             Ref 1
