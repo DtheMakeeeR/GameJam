@@ -10,6 +10,9 @@ public class MazeSpawner : MonoBehaviour
 
     [Header("Префаб")]
     public Tile tilePrefab;
+    
+    [Header("Сущности")]
+    [SerializeField] private GameObject[] _entities;
 
     public static MazeSpawner Instance { get; private set; }
     private void Awake()
@@ -33,6 +36,7 @@ public class MazeSpawner : MonoBehaviour
     private void GenerateAndSpawnMaze()
     {
         MazeGrid grid = new MazeGrid(width, height);
+        bool[,] entitiesPosition = new bool[width, height];
         EllerGenerator generator = new EllerGenerator();
         generator.Generate(grid);
 
@@ -83,6 +87,36 @@ public class MazeSpawner : MonoBehaviour
         if (TilesManager.Instance != null)
         {
             TilesManager.Instance.InitDynamically(spawnedTiles.ToArray());
+        }
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                entitiesPosition[i, j] = false;
+            }
+        }
+        
+        if (_entities == null) return;
+        
+        foreach (var entity in _entities)
+        {
+             int x = Random.Range(0, width);
+             int y = Random.Range(0, height);
+
+             while (((x == 0 || x == width - 1) && (y == 0 || y == height - 1)) ||
+                    (Mathf.Abs(x - width / 2) < 2 && Mathf.Abs(y - height / 2) < 2) ||
+                    entitiesPosition[x, y] == true)
+             {
+                 x  = Random.Range(0, width);
+                 y = Random.Range(0, height);
+             }
+             
+             float spawnY = (height - 1 - y) * TileSize;
+             Vector3 spawnPos = new Vector3(x * TileSize - width/2, spawnY - height/2, 0);
+     
+             Instantiate(entity, spawnPos, Quaternion.identity);
+             entitiesPosition[x, y] = true;
         }
     }
 }
