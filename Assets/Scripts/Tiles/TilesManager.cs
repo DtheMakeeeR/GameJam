@@ -5,17 +5,19 @@ public class TilesManager : MonoBehaviour
 {
     [SerializeField] private Tile[] _tiles;
     [SerializeField] private float _tilesLevel;
-    public static TilesManager Instance;
+    public static TilesManager Instance { get; private set; }
+    
     private void Awake()
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        // if(Instance == null)
+        // {
+        //     Instance = this;
+        // }
+        // else
+        // {
+        //     Destroy(this);
+        // }
+        Instance = this;
     }
     private void Start()
     {
