@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FieldOfView _fieldOfView;
     [SerializeField] private FieldOfView _flashLight;
     [SerializeField] private FieldOfView _glasses;
+    [SerializeField] private GameObject _lamplighter = null;
 
 
 
@@ -37,7 +38,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _dieSound;
 
     public bool SpecialFlag { get; set; } = true;
+    public int _stepsWithDebuff = 0;
     private bool CanMove => _currentSteps > 0 && SpecialFlag;
+    private bool _hasGlasses = false;
+    private bool _hasFlashlight = false;
+    private float _standartPower;
+    public Vector3 PreviousPos { get; private set; }
     int CurrentSteps
     {
         get => _currentSteps;
@@ -65,6 +71,11 @@ public class PlayerController : MonoBehaviour
         CurrentSteps = _stepsPerCycle;
     }
 
+    private void Start()
+    {
+        _standartPower = _fieldOfView.GetDistance();
+    }
+
     private void OnWaitPerformed(InputAction.CallbackContext context)
     {
         if (CurrentSteps == 0) return;
@@ -88,6 +99,21 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if (!CanMove) return;
+        PreviousPos = transform.position.With(z: 0);
+        if(_stepsWithDebuff  > 0)
+        {
+            _stepsWithDebuff--;
+            if(_stepsWithDebuff == 0)
+            {
+                TurnFlashlight(_hasFlashlight);
+                TurnGlasses(_hasGlasses);
+                _fieldOfView.SetViewDistance(_standartPower);
+            }
+        }
+        if (_lamplighter != null)
+        {
+            _lamplighter.transform.position = PreviousPos;
+        }
         _flashLight.SetAimDirection(_moveInput);
         ChangeDirectionOfSprite();
         if (TilesManager.Instance.CanEnterTile(transform.position.With(z: 0), transform.position.With(z: 0) + new Vector3(_moveInput.x, _moveInput.y, 0)))
@@ -104,6 +130,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void  SetDebuff(float power, int duration)
+    {
+        _fieldOfView.SetViewDistance(power);
+        _flashLight.gameObject.SetActive(false);
+        _glasses.gameObject.SetActive(false);
+        _stepsWithDebuff = duration;
+    }
     
     private void ChangeDirectionOfSprite()
     {
@@ -150,10 +183,12 @@ public class PlayerController : MonoBehaviour
     public void TurnFlashlight(bool isOn)
     {
         _flashLight.gameObject.SetActive(isOn);
+        _hasFlashlight = isOn;
     }
     public void TurnGlasses(bool isOn)
     {
         _glasses.gameObject.SetActive(isOn);
+        _hasGlasses = isOn;
     }
     public void AddSteps(int steps)
     {
@@ -162,6 +197,11 @@ public class PlayerController : MonoBehaviour
     public void IncreaseStepsPerCycle(int steps)
     {
         _stepsPerCycle += steps;
+    }
+
+    public void SetLamplighter(GameObject obj)
+    {
+        _lamplighter = obj;
     }
     public void SetSpecialFlag(bool flag) => SpecialFlag = flag;
     private void OnTriggerEnter2D(Collider2D collision)
