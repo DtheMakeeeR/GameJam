@@ -58,4 +58,9 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    public void ChangeWall(int wallIndex, bool flag)
+    {
+        _walls[wallIndex] = flag;
+    }
 }

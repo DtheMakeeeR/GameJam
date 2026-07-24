@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Шаги")]
     [SerializeField] private int _stepsPerCycle;
     [SerializeField] private int _currentSteps;
+    [SerializeField] private AudioClip _walkSound;
 
     //[Header("Спрайты")]
     //[SerializeField] private GameObject _sideSprite;
@@ -27,7 +28,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TMP_Text _stepsText;
     [SerializeField] private FieldOfView _fieldOfView;
 
+    [Header("Настройки")]
+    [SerializeField] private AudioClip _dieSound;
+
     private bool CanMove => _currentSteps > 0;
+    int CurrentSteps
+    {
+        get => _currentSteps;
+        set
+        {
+            _currentSteps = value;
+            UpdateStepsText();
+        }
+    }
 
     private InputActionMap _playerActionMap;
     private Vector2 _moveInput;
@@ -37,8 +50,7 @@ public class PlayerController : MonoBehaviour
         _playerActionMap.Enable();
         _playerActionMap.FindAction("Move").performed += OnMovePerformed;
 
-        _currentSteps = _stepsPerCycle;
-        UpdateStepsText();
+        CurrentSteps = _stepsPerCycle;
     }
 
     private void UpdateStepsText()
@@ -58,7 +70,29 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if (!CanMove) return;
-        if (_moveInput.x < 0) {
+        ChangeDirectionOfSprite();
+        if (TilesManager.Instance.CanEnterTile(transform.position.With(z: 0), transform.position.With(z: 0) + new Vector3(_moveInput.x, _moveInput.y, 0)))
+        {
+            Debug.Log("Path is clear. Moving player.");
+            CurrentSteps--;
+            SFXManager.Instance.PlaySoundOnce(_walkSound);
+            if (CurrentSteps == 0)
+            {
+                StepsManager.Instance.StartEnemyTurn();
+            }
+            transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
+
+        }
+        else
+        {
+            Debug.Log("Can't move to the target tile!");
+        }
+    }
+
+    private void ChangeDirectionOfSprite()
+    {
+        if (_moveInput.x < 0)
+        {
 
             Vector3 newLocalScale = gameObject.transform.localScale;
             newLocalScale.x = -Mathf.Abs(newLocalScale.x);
@@ -70,48 +104,14 @@ public class PlayerController : MonoBehaviour
             newLocalScale.x = Mathf.Abs(newLocalScale.x);
             gameObject.transform.localScale = newLocalScale;
         }
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, _moveInput, _raycastDistance, _raycastMask);
-        //if (hit)
-        //{
-        //    Debug.Log($"Hit: {hit.collider.name}. Can't move!");
-        //}
-        //else
-        //{
-        //    Debug.Log("Path is clear. Moving player.");
-        //    _currentSteps--;
-        //    UpdateStepsText();
-        //    if ( _currentSteps == 0 )
-        //    {
-        //        Timing.RunCoroutine(_ResetStepsCoroutine().CancelWith(gameObject));
-        //    }
-        //    transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
-        //}
-        if (TilesManager.Instance.CanEnterTile(transform.position.With(z: 0), transform.position.With(z: 0) + new Vector3(_moveInput.x, _moveInput.y, 0)))
-        {
-            Debug.Log("Path is clear. Moving player.");
-            _currentSteps--;
-            UpdateStepsText();
-            if (_currentSteps == 0)
-            {
-                Timing.RunCoroutine(_ResetStepsCoroutine().CancelWith(gameObject));
-            }
-            transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
-            
-        }
-        else
-        {
-            Debug.Log("Can't move to the target tile!");
-        }
     }
 
-    public IEnumerator<float> _ResetStepsCoroutine()
+
+    public void ResetSteps()
     {
-        yield return Timing.WaitForSeconds(5f);
-        _currentSteps = _stepsPerCycle;
-        UpdateStepsText();
+        CurrentSteps = _stepsPerCycle;
     }
 
-    
     private void OnDisable()
     {
         if (_playerActionMap != null)
@@ -123,5 +123,28 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _fieldOfView.SetOrigin(transform.position.With(z: -1));
+    }
+
+    public void SetViewDistance(float distance)
+    {
+        _fieldOfView.SetViewDistance(distance);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("ENTER TRIGGER");
+        Interactble other = collision.GetComponent<Interactble>();
+        other?.MakeInteraction(this);
+    }
+
+    public void Die()
+    {
+        //TODO: Add death 
+        SFXManager.Instance.PlaySoundOnce(_dieSound);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit;
+#endif
     }
 }

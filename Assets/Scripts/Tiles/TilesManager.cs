@@ -5,16 +5,17 @@ public class TilesManager : MonoBehaviour
 {
     [SerializeField] private Tile[] _tiles;
     [SerializeField] private float _tilesLevel;
-    public static TilesManager Instance;
+    public static TilesManager Instance { get; private set; }
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(this);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
     private void Start()
@@ -35,6 +36,7 @@ public class TilesManager : MonoBehaviour
     {
         foreach (var tile in _tiles)
         {
+            Debug.Log($"Compare {tile.transform.position} with {position} ");
             if (tile.transform.position == position)
             {
                 return tile;
