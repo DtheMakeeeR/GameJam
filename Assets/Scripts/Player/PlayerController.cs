@@ -122,6 +122,6 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        _fieldOfView.SetOrigin(transform.position.With(z: -1));
+        _fieldOfView.SetOrigin(transform.position.With(z: 0));
     }
 }

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BBehindMaskMaterial
-  m_Shader: {fileID: 4800000, guid: 40cb4a8546b39944cb7256afa461d83c, type: 3}
+  m_Name: DarknessStencil
+  m_Shader: {fileID: 4800000, guid: 255e53636bbe635879608ed5d6a1182c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
