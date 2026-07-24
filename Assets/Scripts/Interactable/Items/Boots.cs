@@ -7,6 +7,7 @@ public class Boots : Interactble
     public override void MakeInteraction(PlayerController player)
     {
         player.AddSteps(_stepsIncrease);
+        player.IncreaseStepsPerCycle(_stepsIncrease);
         transform.parent?.gameObject.SetActive(false);
     }
 }

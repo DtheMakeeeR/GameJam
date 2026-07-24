@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Mob
+  - NPC_Place
   layers:
   - Default
   - TransparentFX

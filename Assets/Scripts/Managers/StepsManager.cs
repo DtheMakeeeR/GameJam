@@ -44,27 +44,24 @@ public class StepsManager : MonoBehaviour
         _player.ResetSteps();
     }
 
-    private IEnumerator<float> _EnemyStepsCoroutine()
+    private IEnumerator<float> _EnemyStepsCoroutine(int n = 1)
     {
         _player.SpecialFlag = false;
-        foreach (var mob in _mobs)
+        for(int i = 0; i < n; i++)
         {
-            Debug.Log($"Mob {mob} is making a step.");
-            mob.MakeStep();
-            yield return Timing.WaitForSeconds(_delayBetweenSteps);
+            foreach (var mob in _mobs)
+            {
+                Debug.Log($"Mob {mob} is making a step.");
+                mob.MakeStep();
+                yield return Timing.WaitForSeconds(_delayBetweenSteps);
+            }
         }
+        
         _player.SpecialFlag = true;
     }
     public void RunEnemies(int n = 1)
     {
-        for (int i = 0; i < n; i++)
-        {
-            CoroutineHandle enemyStepsCoroutine = Timing.RunCoroutine(_EnemyStepsCoroutine().CancelWith(gameObject));
-            while (Timing.IsRunning(enemyStepsCoroutine))
-            {
-                
-            }
-        }
+            CoroutineHandle enemyStepsCoroutine = Timing.RunCoroutine(_EnemyStepsCoroutine(n).CancelWith(gameObject));
     }
     public void StartEnemyTurn()
     {
