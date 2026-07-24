@@ -359,5 +359,32 @@ public class EllerGenerator : MazeGenerator
                 }
             }
         }
+        
+        DeleteWalls(maze);
+    }
+
+    private void DeleteWalls(MazeGrid maze)
+    {
+        int count = (int)(maze.Width * maze.Height / 4);
+        Cell[] cellOnDelete =  new Cell[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            int x = Random.Next(0, maze.Width);
+            int y = Random.Next(0, maze.Height);
+            
+            while (x == 0 || x == maze.Width - 1 || y == 0 || y == maze.Height - 1)
+            {
+                x = Random.Next(0, maze.Width);
+                y = Random.Next(0, maze.Height);
+            }
+            cellOnDelete[i] = maze.Maze[y][x];
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            int direction = Random.Next(0, 4);
+            cellOnDelete[i].Sub(direction);
+        }
     }
 }

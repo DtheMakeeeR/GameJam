@@ -14,11 +14,16 @@ public class StepsManager : MonoBehaviour
         }
         else
         {
-            FindAllMobs();
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    private void Start()
+    {
+        FindAllMobs();
+    }
+
     [Header("Ссылки")]
     [SerializeField] private PlayerController _player;
     [SerializeField] private List<IMob> _mobs = new List<IMob>();
