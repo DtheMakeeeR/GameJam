@@ -41,35 +41,33 @@ public class Skeleton : Interactble, IMob
     {
         if (_direction)
         {
-            var dir = _directions[DirIndex];
-            if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
+            for (int i = 0;i < 3; DirIndex++)
             {
-                Debug.Log($"Skeleton cav move in {dir} direction");
-                transform.parent.position += dir;
-                SFXManager.Instance.PlaySoundOnce(_walkSound);
-                return;
+                var dir = _directions[DirIndex];
+                if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
+                {
+                    Debug.Log($"Skeleton cav move in {dir} direction");
+                    transform.parent.position += dir;
+                    SFXManager.Instance.PlaySoundOnce(_walkSound);
+                    return;
+                }
             }
-            DirIndex++;
-            if (DirIndex == 0)
-            {
-                _direction = false;
-            }
+            _direction = false;
         }
         else
         {
-            var dir = _directions[DirIndex];
-            if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
+            for (int i = 0; i < 3; DirIndex--)
             {
-                Debug.Log($"Skeleton cav move in {dir} direction");
-                transform.parent.position += dir;
-                SFXManager.Instance.PlaySoundOnce(_walkSound);
-                return;
+                var dir = _directions[DirIndex];
+                if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
+                {
+                    Debug.Log($"Skeleton cav move in {dir} direction");
+                    transform.parent.position += dir;
+                    SFXManager.Instance.PlaySoundOnce(_walkSound);
+                    return;
+                }
             }
-            DirIndex--;
-            if (DirIndex == _directions.Length-1)
-            {
-                _direction = true;
-            }
+            _direction = true;
         }
     }
 }

@@ -27,11 +27,17 @@ public class PlayerController : MonoBehaviour
     [Header("Ссылки")]
     [SerializeField] private TMP_Text _stepsText;
     [SerializeField] private FieldOfView _fieldOfView;
+    [SerializeField] private FieldOfView _flashLight;
+    [SerializeField] private FieldOfView _glasses;
+
+
+
 
     [Header("Настройки")]
     [SerializeField] private AudioClip _dieSound;
 
-    private bool CanMove => _currentSteps > 0;
+    public bool SpecialFlag { get; set; } = true;
+    private bool CanMove => _currentSteps > 0 && SpecialFlag;
     int CurrentSteps
     {
         get => _currentSteps;
@@ -39,6 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             _currentSteps = value;
             UpdateStepsText();
+
+            if (CurrentSteps == 0)
+            {
+                StepsManager.Instance.StartEnemyTurn();
+            }
         }
     }
 
@@ -49,8 +60,15 @@ public class PlayerController : MonoBehaviour
         _playerActionMap = InputSystem.actions.FindActionMap("Player");
         _playerActionMap.Enable();
         _playerActionMap.FindAction("Move").performed += OnMovePerformed;
+        _playerActionMap.FindAction("Jump").performed += OnWaitPerformed;
 
         CurrentSteps = _stepsPerCycle;
+    }
+
+    private void OnWaitPerformed(InputAction.CallbackContext context)
+    {
+        if (CurrentSteps == 0) return;
+        CurrentSteps--;
     }
 
     private void UpdateStepsText()
@@ -70,16 +88,13 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if (!CanMove) return;
+        _flashLight.SetAimDirection(_moveInput);
         ChangeDirectionOfSprite();
         if (TilesManager.Instance.CanEnterTile(transform.position.With(z: 0), transform.position.With(z: 0) + new Vector3(_moveInput.x, _moveInput.y, 0)))
         {
             Debug.Log("Path is clear. Moving player.");
             CurrentSteps--;
             SFXManager.Instance.PlaySoundOnce(_walkSound);
-            if (CurrentSteps == 0)
-            {
-                StepsManager.Instance.StartEnemyTurn();
-            }
             transform.position = transform.position + new Vector3(_moveInput.x, _moveInput.y, 0);
 
         }
@@ -89,6 +104,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
     private void ChangeDirectionOfSprite()
     {
         if (_moveInput.x < 0)
@@ -122,14 +138,28 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        _fieldOfView.SetOrigin(transform.position.With(z: 0));
+        _fieldOfView.SetOrigin(transform.position.With(z: -1));
+        _flashLight.SetOrigin(transform.position.With(z: -1));
+        _glasses.SetOrigin(transform.position.With(z: -1));
     }
 
     public void SetViewDistance(float distance)
     {
         _fieldOfView.SetViewDistance(distance);
     }
-
+    public void TurnFlashlight(bool isOn)
+    {
+        _flashLight.gameObject.SetActive(isOn);
+    }
+    public void TurnGlasses(bool isOn)
+    {
+        _glasses.gameObject.SetActive(isOn);
+    }
+    public void AddSteps(int steps)
+    {
+        CurrentSteps += steps;
+    }
+    public void SetSpecialFlag(bool flag) => SpecialFlag = flag;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("ENTER TRIGGER");
