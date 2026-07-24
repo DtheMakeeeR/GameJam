@@ -21,7 +21,7 @@ public class TilesManager : MonoBehaviour
     }
     private void Start()
     {
-        SortAndRenameTiles();
+        // SortAndRenameTiles();
     }
 
     private void SortAndRenameTiles()
@@ -53,5 +53,10 @@ public class TilesManager : MonoBehaviour
             return false;
         }
         return targetTile.CanEnter(startPos);
+    }
+    
+    public void InitDynamically(Tile[] newTiles)
+    {
+        _tiles = newTiles;
     }
 }
