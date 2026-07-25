@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelFlagsManager : MonoBehaviour
 {
     public static LevelFlagsManager Instance { get; private set; }
+    [SerializeField] private bool _isNeedToChangeLevel = true;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,7 +28,7 @@ public class LevelFlagsManager : MonoBehaviour
             _flags = value;
             if (_flags <= 0)
             {
-                LoadNextLevel();
+                if(_isNeedToChangeLevel) LoadNextLevel();
             }
         }
     }
