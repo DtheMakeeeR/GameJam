@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Letter
   _panel: {fileID: 0}
-  _isFlag: 1
+  _isFlag: 0
 --- !u!1 &8848434136441358715
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4923871421373416113}
   m_Layer: 8
-  m_Name: Letter
+  m_Name: Letter no Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,11 +150,11 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2280869745046476500}
   - {fileID: 6890585080888420076}
-  - {fileID: 4258535232786935561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6218590259194122244
+--- !u!1001 &8282897263724210649
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -231,8 +231,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: bbf427fd9ab793942a8fd84d41b92296, type: 3}
---- !u!4 &4258535232786935561 stripped
+--- !u!4 &2280869745046476500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: bbf427fd9ab793942a8fd84d41b92296, type: 3}
-  m_PrefabInstance: {fileID: 6218590259194122244}
+  m_PrefabInstance: {fileID: 8282897263724210649}
   m_PrefabAsset: {fileID: 0}

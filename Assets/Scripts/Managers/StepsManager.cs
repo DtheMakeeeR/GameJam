@@ -22,6 +22,7 @@ public class StepsManager : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(FindAllMobs), 0.5f);
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     [Header("Ссылки")]
