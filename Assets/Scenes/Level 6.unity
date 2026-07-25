@@ -135,6 +135,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Letter Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_text
+      value: It's been about an hour. The parents were able to fix the car, but Henry
+        was missing. Mom and dad went to look for him in the woods, but I was told
+        to stay in the car and wait for them. But I can't just sit back! I'll go
+        look for him too!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.36651343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.054111768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4288306446
+      objectReference: {fileID: 0}
     - target: {fileID: 8620551172845699578, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

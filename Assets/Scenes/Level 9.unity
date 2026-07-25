@@ -613,11 +613,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_text
-      value: the end text
+      value: 'For 9 days I wandered in the maze, not understanding what was going
+        on... Why am I here? How do I get out of here? Who are all these monsters?
+        Now everything fell into place: it was all just a kind of purgatory, after
+        which I realized my death... It''s a pity that it ended like this. I hope
+        my family can move on...'
       objectReference: {fileID: 0}
     - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_fontSize
-      value: 14
+      value: 24.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_margin.w
+      value: 107.49597
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_margin.z
+      value: -198.32758
       objectReference: {fileID: 0}
     - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_fontColor.b
@@ -633,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_fontSizeBase
-      value: 14
+      value: 24.8
       objectReference: {fileID: 0}
     - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_fontColor32.rgba

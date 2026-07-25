@@ -433,6 +433,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Letter Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_text
+      value: We're finally going! Hooray hooray ! It turned out that the bear had
+        fallen under the bed and we found it quickly enough. We're out of town now.
+        There is a high dense forest around. It seems so dark in it, even though
+        the sun is shining brightly in the sky.
+      objectReference: {fileID: 0}
     - target: {fileID: 8620551172845699578, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
