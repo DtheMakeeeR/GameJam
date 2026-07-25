@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         _moveInput = context.ReadValue<Vector2>();
         Debug.Log($"Move Input: {_moveInput}");
-        if (Mathf.Abs(_moveInput.x) < 1 && Mathf.Abs(_moveInput.y) < 1) _moveInput = new Vector2(0, 0);
+        if (Mathf.Abs(_moveInput.x) < 1 && Mathf.Abs(_moveInput.y) < 1) return;
         Debug.Log($"Move Input: {_moveInput}");
         Move();
     }
