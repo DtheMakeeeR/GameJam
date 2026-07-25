@@ -13,7 +13,7 @@ public class Shadow : MonoBehaviour, IMob
     
     public int Steps => _steps;
     private List<Vector3> _directions;
-    private string _mobTag = "Mob";
+    private string _mobTag = "Boy";
     GameObject _target;
     private SpriteRenderer _spriteRenderer;
 
@@ -36,13 +36,7 @@ public class Shadow : MonoBehaviour, IMob
     
     private void FindTargetPath()
     {
-        GameObject[] allMobs = GameObject.FindGameObjectsWithTag(_mobTag);
-
-        foreach (var mob in allMobs)
-        {
-            if (mob.name == "BoyParent(Clone)")
-                _target = mob;
-        }
+        _target = GameObject.FindGameObjectWithTag(_mobTag);
 
         MazeGrid grid = MazeSpawner.Instance.Grid;
         int width = MazeSpawner.Instance.Grid.Width;

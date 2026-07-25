@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 602337608516130577}
   m_Layer: 0
   m_Name: BoyParent
-  m_TagString: Untagged
+  m_TagString: Boy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 4dba19bcc876a91499b53f49169e6b2f, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Boy
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 4dba19bcc876a91499b53f49169e6b2f, type: 3}
       propertyPath: m_MaskInteraction
@@ -188,4 +188,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boy
   _meetSound: {fileID: 8300000, guid: 9228e3d769ae36347b9681e46c1c3651, type: 3}
-  _steps: 1
