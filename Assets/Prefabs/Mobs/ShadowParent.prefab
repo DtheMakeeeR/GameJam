@@ -143,7 +143,7 @@ MonoBehaviour:
   _spwanSound: {fileID: 8300000, guid: b5cd7cdb1aa592d48a43aa3fc5bc8551, type: 3}
   _killSound: {fileID: 8300000, guid: 252bbec67c4224d2da3a1e7ba8a933bb, type: 3}
   _steps: 1
-  _timeOut: 3
+  _timeOut: 5
 --- !u!61 &3205156702734629843
 BoxCollider2D:
   m_ObjectHideFlags: 0
