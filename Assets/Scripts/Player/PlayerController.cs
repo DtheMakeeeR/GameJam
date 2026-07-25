@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MEC;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -216,10 +217,6 @@ public class PlayerController : MonoBehaviour
     {
         //TODO: Add death 
         SFXManager.Instance.PlaySoundOnce(_dieSound);
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit;
-#endif
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
