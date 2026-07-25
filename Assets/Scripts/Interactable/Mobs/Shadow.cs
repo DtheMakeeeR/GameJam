@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Shadow : MonoBehaviour, IMob
 {
@@ -137,10 +138,6 @@ public class Shadow : MonoBehaviour, IMob
     {
         yield return new WaitForSeconds(3f);
         
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

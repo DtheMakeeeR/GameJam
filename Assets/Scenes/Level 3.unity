@@ -433,6 +433,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Letter Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_text
+      value: "Henry woke up the latest, sleepyhead! Dad has finally finished fixing
+        the car and it's time for us to leave. But my brother can't find his beloved
+        bear, and I was asked to help him. He's always losing his toys, and I'm looking
+        for them.\u2026 I hope we won't be late for the festival because of him."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontSize
+      value: 29.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 29.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8620551172845699578, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -135,6 +135,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Letter Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7661854822577159594, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
+      propertyPath: m_text
+      value: We have an emergency! The car broke down again. We stopped at the side
+        of the road, and there wasn't a soul around... Mom and dad were looking at
+        something under the hood, and Henry was looking at butterflies on the side
+        of the road.
+      objectReference: {fileID: 0}
     - target: {fileID: 8620551172845699578, guid: 10a82efdf4e1e2e4ab3277d91d7b7d77, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
