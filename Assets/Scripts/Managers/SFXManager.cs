@@ -13,7 +13,6 @@ public class SFXManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     public void PlaySoundOnce(AudioClip clip)

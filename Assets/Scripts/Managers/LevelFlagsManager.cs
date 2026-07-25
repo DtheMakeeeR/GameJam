@@ -14,7 +14,6 @@ public class LevelFlagsManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

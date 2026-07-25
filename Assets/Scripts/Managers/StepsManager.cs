@@ -15,7 +15,6 @@ public class StepsManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -66,7 +65,7 @@ public class StepsManager : MonoBehaviour
     }
     public void StartEnemyTurn()
     {
-        Timing.RunCoroutine(_StartEnemyTurnCoroutine());
+        Timing.RunCoroutine(_StartEnemyTurnCoroutine().CancelWith(gameObject));
     }
     private void FindAllMobs()
     {

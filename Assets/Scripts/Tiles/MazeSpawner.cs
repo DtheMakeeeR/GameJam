@@ -27,7 +27,6 @@ public class MazeSpawner : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

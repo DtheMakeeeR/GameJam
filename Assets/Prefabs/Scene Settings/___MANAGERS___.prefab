@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 934675250669262834}
   - component: {fileID: 850717180843152869}
   - component: {fileID: 97539844742070822}
+  - component: {fileID: 1733058843309620041}
+  - component: {fileID: 3998717204800623880}
+  - component: {fileID: 7341311415226853328}
   m_Layer: 0
   m_Name: ___MANAGERS___
   m_TagString: Untagged
@@ -31,8 +34,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7156979913297793137}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &934675250669262834
@@ -159,46 +161,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &3183264496816916268
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7156979913297793137}
-  - component: {fileID: 1261505311730629278}
-  - component: {fileID: 5027969252518118580}
-  m_Layer: 0
-  m_Name: Maze Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7156979913297793137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183264496816916268}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3248171148449313057}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1261505311730629278
+--- !u!114 &1733058843309620041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183264496816916268}
+  m_GameObject: {fileID: 1370756618624386520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f340d343520ac3145a53c522b47b1450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelFlagsManager
+  _flags: 1
+--- !u!114 &3998717204800623880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370756618624386520}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f557ed734356bd92685e558e8f23cb22, type: 3}
@@ -206,17 +188,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MazeSpawner
   width: 5
   height: 5
+  _hasExit: 0
   tilePrefab: {fileID: 854783299162934412, guid: ca564e0773b4c122787560b231624daa, type: 3}
   _entities:
-  - {fileID: 7003469744494311932, guid: b072ac06a3cbe024583f0075e0d37f85, type: 3}
+  - {fileID: 2023597305212234730, guid: 268d193dbb236524a95cbe23d9173aad, type: 3}
+  - {fileID: 2023597305212234730, guid: 268d193dbb236524a95cbe23d9173aad, type: 3}
   - {fileID: 1067884075413867185, guid: 2542dc0731d37104fa0b46b9be08c7f4, type: 3}
---- !u!114 &5027969252518118580
+  - {fileID: 382779376795965991, guid: 9cc3f915e5c69944381cc7838837b0cf, type: 3}
+  - {fileID: 4080475779111047294, guid: ffc19371fb804b446a8952f1a3971ce1, type: 3}
+  - {fileID: 8848434136441358715, guid: 0f818362292ffff4bb23ec27ef01ea99, type: 3}
+--- !u!114 &7341311415226853328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183264496816916268}
+  m_GameObject: {fileID: 1370756618624386520}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93978827101bcb9489c250db62815e85, type: 3}

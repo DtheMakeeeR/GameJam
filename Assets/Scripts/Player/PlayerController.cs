@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         _playerActionMap.FindAction("Jump").performed += OnWaitPerformed;
 
         CurrentSteps = _stepsPerCycle;
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

@@ -3,13 +3,10 @@ using UnityEngine;
 public class Exit : Interactble
 {
     [SerializeField] private AudioClip _exitSound;
+    [SerializeField] private bool _canExit;
+    public void SetCanExit(bool canExit) => _canExit = canExit;
     public override void MakeInteraction(PlayerController player)
     {
-        SFXManager.Instance.PlaySoundOnce(_exitSound);
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit;
-#endif
+        if(_canExit) LevelFlagsManager.Instance.DecreaseFlags();
     }
 }

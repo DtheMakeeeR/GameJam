@@ -30,7 +30,7 @@ public class TilesManager : MonoBehaviour
         Tile targetTile = GetTileAtPosition(targetPos.With(z: _tilesLevel));
         if (targetTile == null)
         {
-            Debug.Log("Target tile not found");
+            Debug.Log($"Target tile at {targetPos} not found");
             return false;
         }
         return targetTile.CanEnter(startPos);
