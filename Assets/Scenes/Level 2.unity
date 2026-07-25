@@ -501,6 +501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '***MANAGERS***'
       objectReference: {fileID: 0}
+    - target: {fileID: 1733058843309620041, guid: ebf80a322ecbe5d48892bdecdee90555, type: 3}
+      propertyPath: _flags
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3248171148449313057, guid: ebf80a322ecbe5d48892bdecdee90555, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -27,12 +27,13 @@ public class MazeSpawner : MonoBehaviour
         else
         {
             Instance = this;
+            GenerateAndSpawnMaze();
         }
     }
 
     private void Start()
     {
-        GenerateAndSpawnMaze();
+        
     }
 
     private void GenerateAndSpawnMaze()
@@ -140,5 +141,6 @@ public class MazeSpawner : MonoBehaviour
         Tile cornerTile = spawnedTiles[tileIndex];
 
         cornerTile.SetupExit(wallIndexToReplace);
+        cornerTile.tag = "Exit";
     }  
 }
