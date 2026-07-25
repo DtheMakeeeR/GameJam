@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3643496d01bcf2847907a400dea7a609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Toy
-  _meetSound: {fileID: 8300000, guid: 9228e3d769ae36347b9681e46c1c3651, type: 3}
+  _meetSound: {fileID: 8300000, guid: 470ff4fb1b81189489eacbd28ccac34b, type: 3}
 --- !u!1 &5323648012325635665
 GameObject:
   m_ObjectHideFlags: 0
