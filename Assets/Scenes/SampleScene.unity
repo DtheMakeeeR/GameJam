@@ -694,10 +694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MazeSpawner
   width: 5
   height: 5
+  _hasExit: 1
   tilePrefab: {fileID: 854783299162934412, guid: ca564e0773b4c122787560b231624daa, type: 3}
-  _entities:
-  - {fileID: 6919504843349009991, guid: 3ef681f4b90e3a941a59d2a8cfd75b9a, type: 3}
-  - {fileID: 8776053785588669059, guid: 60fa535ce135bde3fa4400452cc21a1e, type: 3}
+  _entities: []
 --- !u!4 &403956077
 Transform:
   m_ObjectHideFlags: 0
