@@ -7,6 +7,7 @@ public class MazeSpawner : MonoBehaviour
     public int width = 10;
     public int height = 10;
     public const float TileSize = 1f;
+    [SerializeField] private bool _hasExit = false;
 
     [Header("Префаб")]
     public Tile tilePrefab;
@@ -89,6 +90,8 @@ public class MazeSpawner : MonoBehaviour
         if (TilesManager.Instance != null)
         {
             TilesManager.Instance.InitDynamically(spawnedTiles.ToArray());
+            
+            GenerateExit(spawnedTiles);
         }
 
         for (int i = 0; i < width; i++)
@@ -121,4 +124,22 @@ public class MazeSpawner : MonoBehaviour
              entitiesPosition[x, y] = true;
         }
     }
+
+    private void GenerateExit(List<Tile> spawnedTiles)
+    {
+        if (!_hasExit) return;
+
+        int[] cornerX = { 0, width - 1 };
+        int[] cornerY = { 0, height - 1 };
+
+        int x = cornerX[Random.Range(0, 2)];
+        int y = cornerY[Random.Range(0, 2)];
+
+        int wallIndexToReplace = (y == 0) ? 0 : 2; 
+
+        int tileIndex = y * width + x;
+        Tile cornerTile = spawnedTiles[tileIndex];
+
+        cornerTile.SetupExit(wallIndexToReplace);
+    }  
 }
