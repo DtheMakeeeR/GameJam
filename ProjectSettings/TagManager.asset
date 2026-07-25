@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mob
   - NPC_Place
+  - Boy
   layers:
   - Default
   - TransparentFX
