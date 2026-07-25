@@ -5,7 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Boy : Interactble
 {
     [SerializeField] private AudioClip _meetSound;
-    [SerializeField] private int _steps = 1;
+    // [SerializeField] private int _steps = 1;
     public override void MakeInteraction(PlayerController player)
     {
         Debug.Log("Boy meets player");
