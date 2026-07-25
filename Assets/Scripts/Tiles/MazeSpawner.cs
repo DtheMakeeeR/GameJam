@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class MazeSpawner : MonoBehaviour
 {
-    [Header("Настройки лабиринта")]
+    [Header("Настройки лабиринта")] 
     public int width = 10;
     public int height = 10;
-    private const float TileSize = 1f; // Расстояние между центрами тайлов
+    public const float TileSize = 1f;
 
     [Header("Префаб")]
     public Tile tilePrefab;
@@ -15,6 +15,8 @@ public class MazeSpawner : MonoBehaviour
     [SerializeField] private GameObject[] _entities;
 
     public static MazeSpawner Instance { get; private set; }
+    public MazeGrid Grid { get; private set; }
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,10 +37,10 @@ public class MazeSpawner : MonoBehaviour
 
     private void GenerateAndSpawnMaze()
     {
-        MazeGrid grid = new MazeGrid(width, height);
+        Grid = new MazeGrid(width, height);
         bool[,] entitiesPosition = new bool[width, height];
         EllerGenerator generator = new EllerGenerator();
-        generator.Generate(grid);
+        generator.Generate(Grid);
 
         for (int y = 0; y < height; y++)
         {
@@ -46,20 +48,20 @@ public class MazeSpawner : MonoBehaviour
             {
                 if (x < width - 1)
                 {
-                    bool hasWall = grid.Maze[y][x].Walls[Constants.RIGHT] == 1 || 
-                                   grid.Maze[y][x + 1].Walls[Constants.LEFT] == 1;
+                    bool hasWall = Grid.Maze[y][x].Walls[Constants.RIGHT] == 1 || 
+                                   Grid.Maze[y][x + 1].Walls[Constants.LEFT] == 1;
                                    
-                    grid.Maze[y][x].Walls[Constants.RIGHT] = hasWall ? 1 : 0;
-                    grid.Maze[y][x + 1].Walls[Constants.LEFT] = hasWall ? 1 : 0;
+                    Grid.Maze[y][x].Walls[Constants.RIGHT] = hasWall ? 1 : 0;
+                    Grid.Maze[y][x + 1].Walls[Constants.LEFT] = hasWall ? 1 : 0;
                 }
                 
                 if (y < height - 1)
                 {
-                    bool hasWall = grid.Maze[y][x].Walls[Constants.DOWN] == 1 || 
-                                   grid.Maze[y + 1][x].Walls[Constants.UP] == 1;
+                    bool hasWall = Grid.Maze[y][x].Walls[Constants.DOWN] == 1 || 
+                                   Grid.Maze[y + 1][x].Walls[Constants.UP] == 1;
                                    
-                    grid.Maze[y][x].Walls[Constants.DOWN] = hasWall ? 1 : 0;
-                    grid.Maze[y + 1][x].Walls[Constants.UP] = hasWall ? 1 : 0;
+                    Grid.Maze[y][x].Walls[Constants.DOWN] = hasWall ? 1 : 0;
+                    Grid.Maze[y + 1][x].Walls[Constants.UP] = hasWall ? 1 : 0;
                 }
             }
         }
@@ -70,7 +72,7 @@ public class MazeSpawner : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                Cell logicCell = grid.Maze[y][x];
+                Cell logicCell = Grid.Maze[y][x];
                 
                 float spawnY = (height - 1 - y) * TileSize;
                 Vector3 spawnPos = new Vector3(x * TileSize - width/2, spawnY - height/2, 0);
