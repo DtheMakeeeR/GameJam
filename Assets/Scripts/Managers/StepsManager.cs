@@ -21,7 +21,7 @@ public class StepsManager : MonoBehaviour
 
     private void Start()
     {
-        FindAllMobs();
+        Invoke(nameof(FindAllMobs), 0.5f);
     }
 
     [Header("Ссылки")]
