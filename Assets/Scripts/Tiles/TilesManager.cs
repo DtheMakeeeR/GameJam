@@ -12,20 +12,7 @@ public class TilesManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void Start()
-    {
-        // SortAndRenameTiles();
-    }
-
-    private void SortAndRenameTiles()
-    {
-        var sortedTiles = from t in _tiles orderby (t.transform.position.y, t.transform.position.x) select t;
-        _tiles = sortedTiles.ToArray();
-        foreach (var tile in _tiles)
-        {
-            tile.gameObject.name = $"Tile_{tile.transform.position.x}_{tile.transform.position.y}";
-        }
-    }
+    
     private Tile GetTileAtPosition(Vector3 position)
     {
         foreach (var tile in _tiles)

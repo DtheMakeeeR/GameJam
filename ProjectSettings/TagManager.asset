@@ -7,8 +7,6 @@ TagManager:
   - Mob
   - NPC_Place
   - Boy
-  - LetterPanel
-  - Item_Place
   layers:
   - Default
   - TransparentFX

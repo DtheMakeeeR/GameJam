@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Shadow : MonoBehaviour, IMob
 {
+    [Header("Настройка звуков")]
     [SerializeField] private AudioClip _walkSound;
     [SerializeField] private AudioClip _spwanSound;
+    [SerializeField] private AudioClip _killSound;
 
     [SerializeField] private int _steps = 1;
     [SerializeField] private int _timeOut = 3;
@@ -79,8 +81,8 @@ public class Shadow : MonoBehaviour, IMob
 
     private (int x, int y) WorldToGrid(Vector3 worldPos, int width, int height)
     {
-        int x = Mathf.RoundToInt(worldPos.x + width / 2f);
-        float spawnY = worldPos.y + height / 2f;
+        int x = Mathf.RoundToInt(worldPos.x + width / 2);
+        float spawnY = worldPos.y + height / 2;
         int y = height - 1 - Mathf.RoundToInt(spawnY);
         return (x, y);
     }
@@ -119,5 +121,26 @@ public class Shadow : MonoBehaviour, IMob
         }
 
         return directions;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag(_mobTag))
+        {
+            SFXManager.Instance.PlaySoundOnce(_killSound);
+            
+            StartCoroutine(KillWaitAndQuit());
+        }
+    }
+
+    IEnumerator KillWaitAndQuit()
+    {
+        yield return new WaitForSeconds(3f);
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

@@ -3,8 +3,11 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private bool[] _walls = new bool[4];
+    [SerializeField] private bool[] _exits = new bool[2];
     
     [SerializeField] private GameObject[] _wallVisuals = new GameObject[4]; 
+    [SerializeField] private GameObject[] _exitVisuals = new GameObject[2];
+    
 
     public void Setup(int[] cellWalls)
     {
@@ -12,12 +15,30 @@ public class Tile : MonoBehaviour
         {
             _walls[i] = cellWalls[i] == 1;
             
-            if (_wallVisuals.Length > i && _wallVisuals[i] != null)
+            if (_wallVisuals[i] != null)
             {
                 _wallVisuals[i].SetActive(_walls[i]);
             }
         }
     }
+
+    public void SetupExit(int wallIndex)
+    {
+        _walls[wallIndex] = false;
+        if (_wallVisuals[wallIndex] != null)
+        {
+            _wallVisuals[wallIndex].SetActive(false);
+        }
+
+        int exitIndex = (wallIndex == 0) ? 0 : 1;
+    
+        if (exitIndex < _exitVisuals.Length && _exitVisuals[exitIndex] != null)
+        {
+            _exits[exitIndex] = true;
+            _exitVisuals[exitIndex].SetActive(true);
+        }
+    }
+    
     public bool CanEnter(Vector3 startPos)
     {
         if(startPos.y > transform.position.y)
