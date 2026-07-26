@@ -9,7 +9,7 @@ public class Letter : Interactble
     {
         _panel = GameObject.FindGameObjectWithTag("LetterPanel");
         _panel.SetActive(false);
-        _panel.GetComponentInChildren<Button>().onClick.AddListener(OnDone);
+        _panel.GetComponentInChildren<Button>()?.onClick.AddListener(OnDone);
     }
     public override void MakeInteraction(PlayerController player)
     {

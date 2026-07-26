@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnWaitPerformed(InputAction.CallbackContext context)
     {
-        if (CurrentSteps == 0) return;
+        if (!CanMove) return;
         CurrentSteps--;
     }
 

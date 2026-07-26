@@ -763,6 +763,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3998717204800623880, guid: ebf80a322ecbe5d48892bdecdee90555, type: 3}
+      propertyPath: _hasBoy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998717204800623880, guid: ebf80a322ecbe5d48892bdecdee90555, type: 3}
       propertyPath: _hasExit
       value: 1
       objectReference: {fileID: 0}

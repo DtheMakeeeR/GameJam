@@ -7,7 +7,9 @@ public class MazeSpawner : MonoBehaviour
     public int width = 10;
     public int height = 10;
     public const float TileSize = 1f;
+    [Header("Флаги")]
     [SerializeField] private bool _hasExit = false;
+    [SerializeField] private bool _hasBoy = false;
 
     [Header("Префаб")]
     public Tile tilePrefab;
@@ -142,5 +144,6 @@ public class MazeSpawner : MonoBehaviour
 
         cornerTile.SetupExit(wallIndexToReplace);
         cornerTile.tag = "Exit";
+        if(_hasBoy) cornerTile.GetComponentInChildren<Exit>().SetHasBoy(false);
     }  
 }

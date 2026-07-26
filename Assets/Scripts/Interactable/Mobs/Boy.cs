@@ -10,6 +10,7 @@ public class Boy : Interactble
     {
         Debug.Log("Boy meets player");
         LevelFlagsManager.Instance.DecreaseFlags();
+        GameObject.FindGameObjectWithTag("Exit")?.GetComponentInChildren<Exit>()?.SetHasBoy(true);
         GameObject newPlace = GameObject.FindWithTag("NPC_Place");
         transform.parent.transform.SetParent(newPlace.transform);
         transform.parent.transform.localPosition = Vector3.zero;
