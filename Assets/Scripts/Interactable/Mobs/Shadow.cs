@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Shadow : MonoBehaviour, IMob
 {
@@ -12,16 +13,19 @@ public class Shadow : MonoBehaviour, IMob
     [SerializeField] private AudioClip _killSound;
 
     [SerializeField] private int _steps = 1;
-    [SerializeField] private int _timeOut = 3;
+    public int timeOut = 3;
     
     public int Steps => _steps;
     private List<Vector3> _directions;
     private string _mobTag = "Boy";
     GameObject _target;
     private SpriteRenderer _spriteRenderer;
+    
+    public static Shadow Instance { get; private set; }
 
     private void Awake()
     {
+        Instance = this;
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -58,11 +62,11 @@ public class Shadow : MonoBehaviour, IMob
 
     public void MakeStep()
     {
-        if (_timeOut > 0)
+        if (timeOut > 0)
         {
-            _timeOut--;
+            timeOut--;
 
-            if (_timeOut <= 0)
+            if (timeOut <= 0)
             {
                 _spriteRenderer.enabled = true;
                 SFXManager.Instance.PlaySoundOnce(_spwanSound);
