@@ -8,10 +8,10 @@ public class Letter : Interactble
     [SerializeField] private bool _isFlag = true;
     private void Start()
     {
+        _panel = GameObject.FindGameObjectWithTag("LetterPanel");
+        _panel.SetActive(false);
         if (SceneManager.GetActiveScene().buildIndex != 9)
-        {
-            _panel = GameObject.FindGameObjectWithTag("LetterPanel");
-            _panel.SetActive(false);
+        {            
             _panel.GetComponentInChildren<Button>().onClick.AddListener(OnDone);
         }
     }
