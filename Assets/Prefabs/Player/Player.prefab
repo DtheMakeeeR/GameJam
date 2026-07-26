@@ -155,7 +155,7 @@ MonoBehaviour:
   _flashLight: {fileID: 0}
   _glasses: {fileID: 0}
   _lamplighter: {fileID: 0}
-  _dieSound: {fileID: 8300000, guid: 0040d1087fbfd6742b4a79ff07e429ae, type: 3}
+  _dieSound: {fileID: 8300000, guid: 20ae40cbb9899b6ab83d351617737433, type: 3}
   _stepsWithDebuff: 0
 --- !u!50 &733318895600365821
 Rigidbody2D:
