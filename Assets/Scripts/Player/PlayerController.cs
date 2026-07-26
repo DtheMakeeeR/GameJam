@@ -217,6 +217,13 @@ public class PlayerController : MonoBehaviour
     {
         //TODO: Add death 
         SFXManager.Instance.PlaySoundOnce(_dieSound);
+        StartCoroutine(DeathWaitAndQuit());
+    }
+    
+    IEnumerator DeathWaitAndQuit()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
