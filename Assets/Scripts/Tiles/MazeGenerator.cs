@@ -368,6 +368,8 @@ public class EllerGenerator : MazeGenerator
         int count = (int)(maze.Width * maze.Height / 4);
         Cell[] cellOnDelete =  new Cell[count];
 
+        if (maze.Width <= 2 || maze.Height <= 2) return;
+
         for (int i = 0; i < count; i++)
         {
             int x = Random.Next(0, maze.Width);

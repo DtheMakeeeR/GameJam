@@ -17,7 +17,7 @@ public class TilesManager : MonoBehaviour
     {
         foreach (var tile in _tiles)
         {
-            Debug.Log($"Compare {tile.transform.position} with {position} ");
+            // Debug.Log($"Compare {tile.transform.position} with {position} ");
             if (tile.transform.position == position)
             {
                 return tile;
@@ -30,7 +30,7 @@ public class TilesManager : MonoBehaviour
         Tile targetTile = GetTileAtPosition(targetPos.With(z: _tilesLevel));
         if (targetTile == null)
         {
-            Debug.Log($"Target tile at {targetPos} not found");
+            // Debug.Log($"Target tile at {targetPos} not found");
             return false;
         }
         return targetTile.CanEnter(startPos);

@@ -45,7 +45,7 @@ public class Maiden : Interactble, IMob
         if (!CanMove) { return; }
         if (_direction)
         {
-            for (int i = 0; i < 3; DirIndex++)
+            for (int i = 0; i < 3; i++, DirIndex++)
             {
                 var dir = _directions[DirIndex];
                 if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
@@ -60,7 +60,7 @@ public class Maiden : Interactble, IMob
         }
         else
         {
-            for (int i = 0; i < 3; DirIndex--)
+            for (int i = 0; i < 3; i++, DirIndex--)
             {
                 var dir = _directions[DirIndex];
                 if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))

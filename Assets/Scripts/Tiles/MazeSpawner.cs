@@ -29,13 +29,12 @@ public class MazeSpawner : MonoBehaviour
         else
         {
             Instance = this;
-            GenerateAndSpawnMaze();
         }
     }
 
     private void Start()
     {
-        
+        GenerateAndSpawnMaze();
     }
 
     private void GenerateAndSpawnMaze()
