@@ -53,7 +53,7 @@ public class Lamplighter : Interactble, IMob
         if (!CanMove) { return; }
         if (_direction)
         {
-            for (int i = 0; i < 3; DirIndex++)
+            for (int i = 0; i < 3; i++)
             {
                 var dir = _directions[DirIndex];
                 if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
@@ -63,12 +63,13 @@ public class Lamplighter : Interactble, IMob
                     SFXManager.Instance.PlaySoundOnce(_walkSound);
                     return;
                 }
+                DirIndex++;
             }
             _direction = false;
         }
         else
         {
-            for (int i = 0; i < 3; DirIndex--)
+            for (int i = 0; i < 3; i++)
             {
                 var dir = _directions[DirIndex];
                 if (TilesManager.Instance.CanEnterTile(transform.parent.position, transform.parent.position + dir))
@@ -78,6 +79,7 @@ public class Lamplighter : Interactble, IMob
                     SFXManager.Instance.PlaySoundOnce(_walkSound);
                     return;
                 }
+                DirIndex--;
             }
             _direction = true;
         }
